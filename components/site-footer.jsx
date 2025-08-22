@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { Logo } from "./logo";
 
 export function SiteFooter({ className }) {
@@ -9,40 +10,40 @@ export function SiteFooter({ className }) {
           <Logo />
           <p className="text-center text-sm leading-loose md:text-left">
             Built by{" "}
-            <a
-              href="#"
+            <Link
+              href="https://nextjs.org/"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              shadcn
-            </a>
+              Next JS
+            </Link>
             . Hosted on{" "}
-            <a
+            <Link
               href="https://vercel.com"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               Vercel
-            </a>
+            </Link>
             . Illustrations by{" "}
-            <a
+            <Link
               href="https://popsy.co"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               Popsy
-            </a>
+            </Link>
             . The source code is available on{" "}
-            <a
-              href="#"
+            <Link
+              href="https://github.com/ysarafat/edu-connect"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
               GitHub
-            </a>
+            </Link>
             .
           </p>
         </div>

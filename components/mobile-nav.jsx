@@ -12,7 +12,6 @@ import {
 
 export function MobileNav({ items, children }) {
   useLockBody();
-
   return (
     <div
       className={cn(
