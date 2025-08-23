@@ -1,35 +1,35 @@
 import mongoose, { Schema } from "mongoose";
 
-const moduleSchema = new Schema({
+const lessonSchema = new Schema({
   title: {
     required: true,
     type: String,
   },
   description: {
-    required: true,
+    required: false,
     type: String,
-  },
-  status: {
-    required: true,
-    type: String,
-  },
-  slug: {
-    required: true,
-    type: String,
-  },
-  course: {
-    required: true,
-    type: String,
-  },
-  lessonIds: {
-    required: true,
-    type: [String],
   },
   duration: {
     required: true,
     type: Number,
   },
+  video_url: {
+    required: true,
+    type: String,
+  },
+  published: {
+    required: true,
+    type: Boolean,
+  },
+  slug: {
+    required: true,
+    type: String,
+  },
+  access: {
+    required: true,
+    type: String,
+  },
 });
 
-export const Module =
-  mongoose.models.Module ?? mongoose.model("Module", moduleSchema);
+export const Lesson =
+  mongoose.models.Lesson ?? mongoose.model("Lesson", lessonSchema);

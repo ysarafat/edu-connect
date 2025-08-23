@@ -34,7 +34,7 @@ const CourseDetails = ({ course }) => {
           </div>
           <div className="flex items-center gap-2 text-sm">
             <span className="text-success font-semibold">Last Updated: </span>
-            <span>{formateDate(course?.updatedAt)}</span>
+            <span>{formateDate(course?.modifiedOn)}</span>
           </div>
         </div>
 
@@ -50,7 +50,7 @@ const CourseDetails = ({ course }) => {
               <CourseOverview course={course} />
             </TabsContent>
             <TabsContent value="curriculum">
-              <CourseCurriculum />
+              <CourseCurriculum course={course} />
             </TabsContent>
             <TabsContent value="instructor">
               <CourseInstructor course={course} />
