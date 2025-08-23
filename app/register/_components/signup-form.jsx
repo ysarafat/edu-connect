@@ -25,6 +25,10 @@ export function SignupForm({ role }) {
       const email = formData.get("email");
       const password = formData.get("password");
       const confirmPassword = formData.get("confirmPassword");
+      if (password !== confirmPassword) {
+        toast.error("Passwords do not match");
+        return;
+      }
       const userRole =
         role === "student" || role === "instructor" ? role : "student";
 
