@@ -6,6 +6,10 @@ const courseSchema = new Schema(
       required: true,
       type: String,
     },
+    subTitle: {
+      required: true,
+      type: String,
+    },
     description: {
       required: true,
       type: String,
@@ -45,6 +49,10 @@ const courseSchema = new Schema(
         ref: "Testimonial",
       },
     ],
+    learning: {
+      required: true,
+      type: [String],
+    },
   },
   {
     timestamps: true,
