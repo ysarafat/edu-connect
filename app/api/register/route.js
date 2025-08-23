@@ -18,6 +18,10 @@ export async function POST(request) {
   };
 
   try {
+    const isExisting = await User.findOne({ email });
+    if (isExisting) {
+      return new NextResponse.json("User already exists", { status: 409 });
+    }
     await User.create(newUser);
     return new NextResponse("User has been created successfully", {
       status: 201,

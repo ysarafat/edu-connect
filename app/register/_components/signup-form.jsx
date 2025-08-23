@@ -46,6 +46,7 @@ export function SignupForm({ role }) {
           userRole,
         }),
       });
+
       if (response.status === 201) {
         toast.success("Account created successfully");
         router.push("/login");
