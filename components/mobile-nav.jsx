@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { useLockBody } from "@/hooks/use-lock-body";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
@@ -16,6 +16,10 @@ export function MobileNav({ items, children }) {
   useLockBody();
   const { data: session } = useSession();
   const [loginSession, setLoginSession] = useState(null);
+
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut();
+  }
 
   useEffect(() => {
     setLoginSession(session);

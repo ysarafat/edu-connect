@@ -11,6 +11,7 @@ import CourseCard from "./courses/_components/course-card";
 const HomePage = async () => {
   const categories = await getCategories();
   const courses = await getCourseList();
+
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 grainy">

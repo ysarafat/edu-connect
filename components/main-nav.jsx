@@ -21,6 +21,10 @@ export function MainNav({ items, children }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [loginSession, setLoginSession] = useState(null);
 
+  if (session?.error === "RefreshAccessTokenError") {
+    signOut();
+  }
+
   useEffect(() => {
     setLoginSession(session);
   }, [session]);
