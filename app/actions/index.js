@@ -14,3 +14,8 @@ export async function credentialsLogin(formData) {
     throw new Error(error);
   }
 }
+
+export async function handleSocialLogin(formData) {
+  const provider = formData.get("action");
+  await signIn(provider, { redirectTo: "/courses" });
+}
