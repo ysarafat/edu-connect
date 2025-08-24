@@ -92,6 +92,7 @@ export async function getCourseDetailsByInstructor(instructorId) {
     totalTestimonials.reduce(function (acc, obj) {
       return acc + obj.rating;
     }, 0) / totalTestimonials.length;
+
   return {
     courses: courses.length,
     enrollments: totalEnrollments,
