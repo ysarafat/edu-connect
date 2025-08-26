@@ -1,12 +1,10 @@
 "use client";
-
 import { createCheckoutSession } from "@/app/actions/stripe";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 
 const EnrollCourse = ({ asLink, course }) => {
-  console.log(course);
   const formAction = async (data) => {
     const { url } = await createCheckoutSession(data);
     if (url) {

@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { stripe } from "@/lib/stripe";
 import { getCourseDetails } from "@/queries/courses";
+import { createEnrollment } from "@/queries/enrollments";
 import { getUserByEmail } from "@/queries/users";
 import { CircleCheck } from "lucide-react";
 import Link from "next/link";
@@ -25,7 +26,27 @@ const Success = async ({ searchParams: { session_id, courseId } }) => {
   });
   const paymentIntent = checkoutSession.payment_intent;
   const paymentStatus = paymentIntent ? paymentIntent.status : null;
-  if (paymentStatus !== "succeeded") {
+  if (paymentStatus === "succeeded") {
+    const emailsToSend = [
+      {
+        to: course?.instructor?.email,
+        subject: `New Enrollment for ${courseTitle}`,
+        message: `A new student has enrolled in your course ${courseTitle}. Student Name: ${studentName}, Student Email: ${studentEmail}`,
+      },
+      {
+        to: studentEmail,
+        subject: `Enrollment Successful for ${courseTitle}`,
+        message: `Congratulations ${studentName}! You have successfully enrolled in the course ${courseTitle}.`,
+      },
+    ];
+    const enrolled = await createEnrollment(
+      courseId,
+      loggedInUser?.id,
+      "stripe"
+    );
+    console.log("Enrollment created: ", enrolled);
+    // const response = await sendEmails(emailsToSend);
+    // console.log("Email response: ", response);
   }
   return (
     <div className="h-full w-full flex-1 flex flex-col items-center justify-center">
