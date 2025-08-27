@@ -15,3 +15,8 @@ export async function validatePassword(email, oldPassword) {
   const isMatch = await bcrypt.compare(oldPassword, user.password);
   return isMatch;
 }
+
+export async function getUserDetails(userId) {
+  const user = await User.findById(userId).select("-password").lean();
+  return replaceMongoIdInObject(user);
+}
