@@ -8,10 +8,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { formatPrice } from "@/lib/formatPrice";
 import { cn } from "@/lib/utils";
-import { GraduationCap } from "lucide-react";
-import { Star } from "lucide-react";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
+import {
+  ArrowUpDown,
+  GraduationCap,
+  MoreHorizontal,
+  Pencil,
+  Star,
+} from "lucide-react";
 import Link from "next/link";
 
 export const columns = [
@@ -41,16 +46,13 @@ export const columns = [
       );
     },
     cell: ({ row }) => {
-      const price = parseFloat(row.getValue("price") || "0");
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(price);
-      return <div>{formatted}</div>;
+      const price = row.getValue("price");
+
+      return <div>{formatPrice(price)}</div>;
     },
   },
   {
-    accessorKey: "isPublished",
+    accessorKey: "active",
     header: ({ column }) => {
       return (
         <Button
@@ -62,11 +64,11 @@ export const columns = [
       );
     },
     cell: ({ row }) => {
-      const isPublished = row.getValue("isPublished") || false;
+      const isActive = row.getValue("active") || false;
 
       return (
-        <Badge className={cn("bg-gray-500", isPublished && "bg-success")}>
-          {isPublished ? "Published" : "Unpublished"}
+        <Badge className={cn("bg-gray-500", isActive && "bg-success")}>
+          {isActive ? "Published" : "Unpublished"}
         </Badge>
       );
     },
