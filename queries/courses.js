@@ -11,7 +11,7 @@ import { getEnrollmentForCourse } from "./enrollments";
 import { getTestimonialsForCourse } from "./testimonials";
 
 export async function getCourseList() {
-  const courses = await Course.find()
+  const courses = await Course.find({ active: true })
     .select([
       "title",
       "thumbnail",
@@ -67,7 +67,10 @@ export async function getCourseDetails(courseId) {
 }
 
 export async function getCourseDetailsByInstructor(instructorId, expand) {
-  const courses = await Course.find({ instructor: instructorId }).lean();
+  const courses = await Course.find({
+    instructor: instructorId,
+    active: true,
+  }).lean();
 
   const enrollments = await Promise.all(
     courses.map(async (course) => {
@@ -102,8 +105,11 @@ export async function getCourseDetailsByInstructor(instructorId, expand) {
     }, 0) / totalTestimonials.length;
 
   if (expand) {
+    const instructorAllCourse = await Course.find({
+      instructor: instructorId,
+    }).lean();
     return {
-      courses: courses?.flat(),
+      courses: instructorAllCourse?.flat(),
       enrollments: enrollments?.flat(),
       reviews: totalTestimonials,
     };
