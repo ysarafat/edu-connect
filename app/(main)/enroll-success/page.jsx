@@ -44,7 +44,7 @@ const Success = async ({ searchParams: { session_id, courseId } }) => {
       loggedInUser?.id,
       "stripe"
     );
-    console.log("Enrollment created: ", enrolled);
+    // console.log("Enrollment created: ", enrolled);
     // const response = await sendEmails(emailsToSend);
     // console.log("Email response: ", response);
   }

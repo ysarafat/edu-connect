@@ -6,12 +6,12 @@ const moduleSchema = new Schema({
     type: String,
   },
   description: {
-    required: true,
     type: String,
   },
-  status: {
+  active: {
     required: true,
-    type: String,
+    type: Boolean,
+    default: false,
   },
   slug: {
     required: true,
@@ -19,13 +19,17 @@ const moduleSchema = new Schema({
   },
   course: {
     required: true,
-    type: String,
+    type: Schema.ObjectId,
   },
   lessonIds: {
     required: true,
-    type: [String],
+    type: [Schema.ObjectId],
   },
-  duration: {
+  // duration: {
+  //   required: true,
+  //   type: Number,
+  // },
+  order: {
     required: true,
     type: Number,
   },

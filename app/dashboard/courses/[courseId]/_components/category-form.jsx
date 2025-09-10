@@ -83,7 +83,7 @@ export const CategoryForm = ({ initialData, courseId, options }) => {
           {selectedOptions?.label || "No category"}
         </p>
       )}
-      {console.log({ options })}
+
       {isEditing && (
         <Form {...form}>
           <form

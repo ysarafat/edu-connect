@@ -1,9 +1,10 @@
 "use client";
 import * as z from "zod";
 // import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { UploadDropzone } from "@/components/file-upload";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Combobox } from "@/components/ui/combobox";
 import {
   Form,
   FormControl,
@@ -13,29 +14,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { UploadDropzone } from "@/components/file-upload";
-import { Combobox } from "@/components/ui/combobox";
+import { CalendarIcon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Title is required!",
@@ -80,7 +73,7 @@ const AddLive = () => {
     } catch (error) {
       toast.error("Something went wrong");
     }
-    console.log(values);
+    // console.log(values);
   };
   return (
     <section className="py-8">

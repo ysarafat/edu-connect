@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { createModule, reOrderModules } from "@/app/actions/module";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { getSlug } from "@/lib/convertData";
 import { cn } from "@/lib/utils";
 import { Loader2, PlusCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -23,19 +25,9 @@ import { ModuleList } from "./module-list";
 const formSchema = z.object({
   title: z.string().min(1),
 });
-const initialModules = [
-  {
-    id: "1",
-    title: "Module 1",
-    isPublished: true,
-  },
-  {
-    id: "2",
-    title: "Module 2",
-  },
-];
+
 export const ModulesForm = ({ initialData, courseId }) => {
-  const [modules, setModules] = useState(initialModules);
+  const [modules, setModules] = useState(initialData);
   const router = useRouter();
   const [isCreating, setIsCreating] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -53,6 +45,15 @@ export const ModulesForm = ({ initialData, courseId }) => {
 
   const onSubmit = async (values) => {
     try {
+      const slug = getSlug(values.title);
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("slug", slug);
+      formData.append("courseId", courseId);
+      formData.append("order", modules.length);
+
+      await createModule(formData);
+
       setModules((modules) => [
         ...modules,
         {
@@ -69,10 +70,10 @@ export const ModulesForm = ({ initialData, courseId }) => {
   };
 
   const onReorder = async (updateData) => {
-    console.log({ updateData });
+    // console.log({ updateData });
     try {
       setIsUpdating(true);
-
+      reOrderModules(updateData);
       toast.success("Chapters reordered");
       router.refresh();
     } catch {
